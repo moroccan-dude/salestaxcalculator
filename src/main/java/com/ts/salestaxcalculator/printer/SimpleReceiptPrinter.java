@@ -3,9 +3,6 @@ package com.ts.salestaxcalculator.printer;
 import com.ts.salestaxcalculator.receipt.Receipt;
 import com.ts.salestaxcalculator.receipt.ReceiptEntry;
 
-//
-//import com.ts.salestaxcalculator.receipt.Receipt;
-//import com.ts.salestaxcalculator.receipt.ReceiptEntry;
 
 /**
  * A {@link IReceiptPrinter} that prints out the receipt directly to the console
@@ -15,7 +12,7 @@ import com.ts.salestaxcalculator.receipt.ReceiptEntry;
 public class SimpleReceiptPrinter implements IReceiptPrinter 
 {
 
-//	final Logger LOGGER = LoggerFactory.getLogger(SimpleReceiptPrinter.class);
+	//	final Logger LOGGER = LoggerFactory.getLogger(SimpleReceiptPrinter.class);
 	
 	/**
 	 * {@inheritDoc}
