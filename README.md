@@ -1,4 +1,4 @@
-# simpletaxcalculator Project
+# salestaxcalculator Project
 Simple Sales Tax Calculator
 
 ## Prerequisites
