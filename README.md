@@ -47,3 +47,9 @@ mvn clean package -Dmaven.test.skip=true
 ```
 mvn test
 ```
+
+## Doc
+The following command will generate the java doc into your target directory:
+```
+mvn site
+```
