@@ -18,12 +18,12 @@ Clone this repository. Issue the following command from the location you want th
 It will create a new directory called taxcalculator and will download the code into it.
 
 ```
-git clone https://github.com/moroccan-dude/simpletaxcalculator
+git clone https://github.com/moroccan-dude/salestaxcalculator
 ```
 
-Navigate to the newly created directory simpletaxcalculator
+Navigate to the newly created directory salestaxcalculator
 ```
-cd simpletaxcalculator
+cd salestaxcalculator
 ```
 
 Generate the eclipse artifacts by running (this will incidentally download all the dependencies):
