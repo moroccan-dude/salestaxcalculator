@@ -1,6 +1,7 @@
 package com.ts.salestaxcalculator;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.List;
 import org.junit.Test;
 
 import com.ts.salestaxcalculator.ShoppingCart;
+import com.ts.salestaxcalculator.calculator.PriceCalculator;
+import com.ts.salestaxcalculator.calculator.RoundingUpStrategy;
 import com.ts.salestaxcalculator.items.BasicItem;
 import com.ts.salestaxcalculator.items.Imported;
 import com.ts.salestaxcalculator.items.TaxExempted;
@@ -75,6 +78,69 @@ public class SalesTaxCalculatorTest
 		assertItemValues(cart.getReceipt(), new double[] {1100000000.47,100000000.05,1100000000.47});
     }
 	
+	@Test
+	public void testQuantity()
+	{
+		ShoppingCart cart = new ShoppingCart();
+		cart.addItem(new BasicItem("music CD",14.99));
+		cart.checkout();
+		double totalCostFor1 = cart.getReceipt().getTotalCost();
+		double totalTaxFor1 = cart.getReceipt().getTotalSalesTax();
+		
+		cart.reset();
+		int quantity = 3;
+		cart.addItem(new BasicItem("music CD",14.99,quantity));
+		cart.checkout();
+		double totalCostForQuantity = cart.getReceipt().getTotalCost();
+		double totalTaxForQuantity = cart.getReceipt().getTotalSalesTax();
+		
+		assertEquals(totalCostFor1*quantity, totalCostForQuantity,0);
+		assertEquals(totalTaxFor1*quantity, totalTaxForQuantity,0);
+		assertEquals("The cart should contain 1 item",cart.itemCount(), 1);
+	}
+	
+	@Test
+	public void testBasicItem()
+	{
+		ShoppingCart cart = new ShoppingCart();
+		// Setting the rouding up strategy via the price calculator
+		PriceCalculator pc = new PriceCalculator(new RoundingUpStrategy());
+		cart.setPriceCalculator(pc);
+		
+		double shelfPrice = 10.00;
+		double precision = RoundingUpStrategy.PRECISION_PERCENT/100;
+		
+		cart.addItem(new BasicItem("music CD",shelfPrice));
+		cart.checkout();
+		assertEquals(cart.getReceipt().getTotalSalesTax(), BasicItem.BASIC_SALE_TAX * shelfPrice,precision);
+		assertEquals("The shopping cart total cost is not rounded properly",cart.getReceipt().getTotalCost(), BasicItem.BASIC_SALE_TAX * shelfPrice+ shelfPrice,precision);
+	}
+	
+	@Test
+	public void testImportedItems()
+	{
+		ShoppingCart cart = new ShoppingCart();
+		double shelfPrice = 10.00;
+		long precision = RoundingUpStrategy.PRECISION_PERCENT;
+		
+		cart.addItem(new Imported(new TaxExempted(new BasicItem("box of chocolates",shelfPrice)))); 
+		cart.checkout();
+		assertEquals(cart.getReceipt().getTotalSalesTax(), Imported.TAX_VALUE * shelfPrice,precision);
+		assertEquals(cart.getReceipt().getTotalCost(), Imported.TAX_VALUE * shelfPrice+ shelfPrice,precision);
+		assertTrue(cart.getReceipt().getEntries().get(0).getDescription().startsWith(Imported.IMPORTED_PREFIX));
+	}
+	
+	@Test
+	public void testTaxExemptedItems()
+	{
+		ShoppingCart cart = new ShoppingCart();
+		cart.addItem(new TaxExempted(new BasicItem("headache pills",9.75)));
+		cart.checkout();
+		assertEquals(cart.getReceipt().getTotalSalesTax(), 0,0);
+		assertEquals(cart.getReceipt().getTotalCost(), 9.75,0);
+	}
+	
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void testIllegalArguments()
 	{
@@ -92,7 +158,7 @@ public class SalesTaxCalculatorTest
 		assertEquals(receipt.getTotalCost(),values[0],0);
 		assertEquals(receipt.getTotalSalesTax(),values[1],0);
 		
-		List<ReceiptEntry> entries =  receipt.getReceiptEntries();
+		List<ReceiptEntry> entries =  receipt.getEntries();
 		Iterator<ReceiptEntry> itEntries = entries.iterator();
 		int i = 0;
 		while(itEntries.hasNext())
