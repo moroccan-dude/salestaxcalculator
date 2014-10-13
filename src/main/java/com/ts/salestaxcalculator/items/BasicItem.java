@@ -9,11 +9,11 @@ package com.ts.salestaxcalculator.items;
 public class BasicItem implements IItem {
 
 	/* A BasicItem is taxable at a {@link #BASIC_SALE_TAX} rate. */
-	private final double BASIC_SALE_TAX = 0.1; // 10%
+	public static final double BASIC_SALE_TAX = 0.1; // 10%
 	
 	private String name;
 	private int quantity;
-	private long shelfPrice;
+	private double shelfPrice;
 	
 	/**
 	 * Constructor that takes the name and the item shelfPrice
@@ -40,7 +40,9 @@ public class BasicItem implements IItem {
 	public BasicItem(String name, double shelfPrice, int quantity)
 	{
 		if(shelfPrice<0)
+		{
 			throw new IllegalArgumentException("Illegal price: " + shelfPrice); //TODO i18n
+		}
 		
 		setName(name);
 		setShelfPrice(shelfPrice);
@@ -103,21 +105,17 @@ public class BasicItem implements IItem {
 	 * (non-Javadoc)
 	 * @see com.ts.salestaxcalculator.items.IItem#getShelfPrice()
 	 */
-	public long getShelfPrice() 
+	public double getShelfPrice() 
 	{
 		return shelfPrice;
 	}
 	
 	/**
-	 * Internally Stores item prices as long values to avoid precision loss.
-	 * Prices will be converted back into double when requested using {@link #CENTS_MULTIPLIER}
-	 * 
-	 * <p><strong>Note</strong>: this method assumes prices with a maximum of 2 decimal fraction digits</p>
 	 *  
 	 * @param shelfPrice
 	 */
 	public void setShelfPrice(double shelfPrice) 
 	{
-		this.shelfPrice = Math.round(shelfPrice * CENTS_MULTIPLIER);
+		this.shelfPrice = shelfPrice;
 	}
 }

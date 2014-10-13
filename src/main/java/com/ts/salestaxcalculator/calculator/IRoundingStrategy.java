@@ -14,6 +14,6 @@ public interface IRoundingStrategy {
 	 * @param value to round
 	 * @return the rounded value as per the strategy definition
 	 */
-	public long roundValue(double value);
+	long roundValue(double value);
 
 }

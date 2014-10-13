@@ -1,5 +1,10 @@
 package com.ts.salestaxcalculator.printer;
 
+import java.util.Properties;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.ts.salestaxcalculator.receipt.Receipt;
 import com.ts.salestaxcalculator.receipt.ReceiptEntry;
 
@@ -11,8 +16,24 @@ import com.ts.salestaxcalculator.receipt.ReceiptEntry;
  */
 public class SimpleReceiptPrinter implements IReceiptPrinter 
 {
-
-	//	final Logger LOGGER = LoggerFactory.getLogger(SimpleReceiptPrinter.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SimpleReceiptPrinter.class);
+	
+	@SuppressWarnings("unused")
+	private Properties properties;
+	
+	/**
+	 * Default constructor
+	 */
+	public SimpleReceiptPrinter()
+	{ /* nothing to configure */ }
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setProperties(Properties properties)
+	{
+		this.properties = properties;
+	}
 	
 	/**
 	 * {@inheritDoc}
@@ -23,17 +44,19 @@ public class SimpleReceiptPrinter implements IReceiptPrinter
 	public void print(Receipt receipt)
 	{
 		/* handle the empty receipt case */
-		if(receipt==null || receipt.getReceiptEntries().size()==0)
+		if(receipt==null || receipt.getEntries().size()==0)
+		{	
 			return;
+		}
 		
-		for(ReceiptEntry entry:receipt.getReceiptEntries())
+		for(ReceiptEntry entry:receipt.getEntries())
 		{
-			System.out.println(entry.getQuantity() + " "  + entry.getDescription()  + ": " + 
+			LOG.info(entry.getQuantity() + " "  + entry.getDescription()  + ": " + 
 					formatValue(entry.getTaxPrice()));
 		}
 		
-		System.out.println("Sales Taxes: " + formatValue(receipt.getTotalSalesTax()));
-		System.out.println("Total: " + formatValue(receipt.getTotalCost()));
+		LOG.info("Sales Taxes: " + formatValue(receipt.getTotalSalesTax()));  // TODO i18n
+		LOG.info("Total: " + formatValue(receipt.getTotalCost()));   		  // TODO i18n
 	}
 	
 	/**

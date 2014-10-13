@@ -8,7 +8,11 @@ package com.ts.salestaxcalculator.items;
  */
 public class Imported extends TaxableItem {
 
-	private final double IMPORT_TAX = 0.05; //5%
+	/**
+	 * Import taxes
+	 */
+	public static final double TAX_VALUE = 0.05; //5%
+	public static final String IMPORTED_PREFIX = "imported ";     //TODO i18n
 
 	public Imported(IItem taxableItem) {
 		super(taxableItem);
@@ -16,12 +20,12 @@ public class Imported extends TaxableItem {
 
 	@Override
 	public double getTaxRate() {
-		return super.getTaxRate() + IMPORT_TAX;
+		return super.getTaxRate() + TAX_VALUE;
 	}
 
 	@Override
 	public String getDescription() {
-		return "imported " + super.getDescription();
+		return IMPORTED_PREFIX + super.getDescription();
 	}
 
 }

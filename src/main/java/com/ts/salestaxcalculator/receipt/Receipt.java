@@ -17,7 +17,7 @@ public class Receipt
 	/**
 	 * List of receipt entries making up the receipt
 	 */
-	List<ReceiptEntry> entries = null;
+	private List<ReceiptEntry> entries = null;
 	
 	public Receipt(List<ReceiptEntry> entries, double totalSalesTax, double totalCost)
 	{	
@@ -29,7 +29,7 @@ public class Receipt
 	/**
 	 * @return the list of receipt entries in this receipt
 	 */
-	public List<ReceiptEntry> getReceiptEntries()
+	public List<ReceiptEntry> getEntries()
 	{
 		return entries;
 	}

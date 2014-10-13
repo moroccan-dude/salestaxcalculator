@@ -48,7 +48,7 @@ public class ShoppingCart {
 	/**
 	 * Shopping cart receipt instance
 	 */
-	Receipt receipt = null;
+	private Receipt receipt = null;
 	
 	
 	/**
@@ -66,7 +66,7 @@ public class ShoppingCart {
 	 * it will be handled as two items</p>
 	 * @param item
 	 */
-	public synchronized void addItem(IItem item)
+	public void addItem(IItem item)
 	{
 		items.add(item);
 	}
@@ -120,10 +120,10 @@ public class ShoppingCart {
 			totalSalesTax += calculator.computeSalesTax(item);
 			totalCost += taxPrice;
 			
-			entries.add(new ReceiptEntry(item.getQuantity(), item.getDescription(), calculator.format(taxPrice)));
+			entries.add(new ReceiptEntry(item.getQuantity(), item.getDescription(), calculator.toDoublePrice(taxPrice)));
 		}
 		
-		return new Receipt(entries, calculator.format(totalSalesTax), calculator.format(totalCost));
+		return new Receipt(entries, calculator.toDoublePrice(totalSalesTax), calculator.toDoublePrice(totalCost));
 	}
 	
 	/**

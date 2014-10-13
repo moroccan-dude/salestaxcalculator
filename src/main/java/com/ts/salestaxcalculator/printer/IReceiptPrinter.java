@@ -1,6 +1,8 @@
 package com.ts.salestaxcalculator.printer;
 
 
+import java.util.Properties;
+
 import com.ts.salestaxcalculator.receipt.Receipt;
 
 /**
@@ -11,9 +13,16 @@ import com.ts.salestaxcalculator.receipt.Receipt;
 public interface IReceiptPrinter {
 
 	/**
+	 * Setting properties on the printer for initialization purposes
+	 * 
+	 * @param properties
+	 */
+	void setProperties(Properties properties);
+	
+	/**
 	 * Prints out the receipt
 	 * 
 	 * @param receipt to output
 	 */
-	public void print(Receipt receipt);
+	void print(Receipt receipt);
 }

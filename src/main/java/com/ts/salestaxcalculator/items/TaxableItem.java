@@ -14,8 +14,8 @@ public abstract class TaxableItem implements IItem
     public TaxableItem(IItem taxableItem) {
         this.taxableItem = taxableItem;
     }
-    
-    @Override
+
+	@Override
 	public double getTaxRate()
 	{
 		return taxableItem.getTaxRate();
@@ -39,7 +39,12 @@ public abstract class TaxableItem implements IItem
 	}
 
 	@Override
-	public long getShelfPrice() {
+	public double getShelfPrice() {
 		return taxableItem.getShelfPrice();
 	}
+	
+//    @Override
+//	public double format(long price) {
+//		return taxableItem.format(price);
+//	}
 }

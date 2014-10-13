@@ -15,7 +15,7 @@ public interface IPriceCalculator {
 	 * @param item to compute
 	 * @return the Sale tax applicable to this item
 	 */
-	public long computeSalesTax(IItem item);
+	long computeSalesTax(IItem item);
 	
 	/**
 	 * Compute the item price after tax
@@ -23,14 +23,14 @@ public interface IPriceCalculator {
 	 * @param item to compute
 	 * @return the price of this item after tax
 	 */
-	public long computeTaxedPrice(IItem item);
+	long computeTaxedPrice(IItem item);
 	
 	/**
-	 * Convert from a long value into a double value
+	 * Convert back the price from its long representation to its double value
 	 * 
 	 * @param value to format
 	 * @return formatted value as double 
 	 */
-	public double format(long value);
+	double toDoublePrice(long value);
 	
 }
