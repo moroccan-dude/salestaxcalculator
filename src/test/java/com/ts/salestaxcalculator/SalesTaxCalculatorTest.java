@@ -122,12 +122,21 @@ public class SalesTaxCalculatorTest
 		ShoppingCart cart = new ShoppingCart();
 		double shelfPrice = 10.00;
 		long precision = RoundingUpStrategy.PRECISION_PERCENT;
+		BasicItem item = new BasicItem("box of chocolates",shelfPrice);
 		
-		cart.addItem(new Imported(new TaxExempted(new BasicItem("box of chocolates",shelfPrice)))); 
+		cart.addItem(new Imported(new TaxExempted(item))); 
 		cart.checkout();
+		double totalCostImported = cart.getReceipt().getTotalCost();
 		assertEquals(cart.getReceipt().getTotalSalesTax(), Imported.TAX_VALUE * shelfPrice,precision);
-		assertEquals(cart.getReceipt().getTotalCost(), Imported.TAX_VALUE * shelfPrice+ shelfPrice,precision);
+		assertEquals(totalCostImported, Imported.TAX_VALUE * shelfPrice+ shelfPrice,precision);
 		assertTrue(cart.getReceipt().getEntries().get(0).getDescription().startsWith(Imported.IMPORTED_PREFIX));
+		
+		cart.reset();
+		cart.addItem(new TaxExempted(item));
+		cart.checkout();
+		double totalCostNotImported = cart.getReceipt().getTotalCost();
+		assertTrue("An Imported item should cost more than the same exact item *not imported*",totalCostImported-totalCostNotImported>0);
+		
 	}
 	
 	@Test
