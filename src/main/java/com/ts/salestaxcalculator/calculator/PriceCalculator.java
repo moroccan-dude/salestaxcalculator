@@ -6,7 +6,7 @@ import com.ts.salestaxcalculator.items.IItem;
  * A {@link IPriceCalculator} that computes the item sales tax and its price after tax using a RoundingStrategy
  * In all its calculation and in order to avoid precision loss, this class handles cents as opposed to dollars.
  * 
- * Callers must call {@link #format(long)} to convert prices back into double before using them elsewhere. 
+ * Callers must call {@link #toDoublePrice(long)} to convert prices back into double. 
  * 
  * @author Mehdi Bennani
  * @see IRoundingStrategy
@@ -57,7 +57,7 @@ public class PriceCalculator implements IPriceCalculator {
 	
 	/**
 	 * (non-Javadoc)
-	 * @see com.ts.salestaxcalculator.items.IPriceCalculator#format()
+	 * @see com.ts.salestaxcalculator.items.IPriceCalculator#toDoublePrice()
 	 */
 	public double toDoublePrice(long price) 
 	{

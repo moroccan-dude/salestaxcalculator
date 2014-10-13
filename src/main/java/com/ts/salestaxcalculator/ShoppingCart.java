@@ -26,6 +26,8 @@ import com.ts.salestaxcalculator.receipt.ReceiptEntry;
  * }
  * </pre>
  * 
+ * Note: this class is not Thread-safe.
+ * 
  * @author Mehdi Bennani
  */
 public class ShoppingCart {
@@ -64,7 +66,7 @@ public class ShoppingCart {
 	 * 
 	 * <p>Note: This method does not handle item quantity increment, i.e.: if the same item is added twice in the cart,
 	 * it will be handled as two items</p>
-	 * @param item
+	 * @param item item to add
 	 */
 	public void addItem(IItem item)
 	{
