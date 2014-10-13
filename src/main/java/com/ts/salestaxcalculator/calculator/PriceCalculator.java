@@ -57,7 +57,7 @@ public class PriceCalculator implements IPriceCalculator {
 	
 	/**
 	 * (non-Javadoc)
-	 * @see com.ts.salestaxcalculator.items.IPriceCalculator#toDoublePrice()
+	 * @see com.ts.salestaxcalculator.calculator.IPriceCalculator#toDoublePrice(long)
 	 */
 	public double toDoublePrice(long price) 
 	{

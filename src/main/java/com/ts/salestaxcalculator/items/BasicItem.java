@@ -49,7 +49,7 @@ public class BasicItem implements IItem {
 		setQuantity(quantity);
 	}
 	
-	/*
+	/**
 	 * (non-Javadoc)
 	 * @see com.ts.salestaxcalculator.items.IItem#getTaxRate()
 	 */
@@ -57,7 +57,7 @@ public class BasicItem implements IItem {
 		return BASIC_SALE_TAX;
 	}
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * @see com.ts.salestaxcalculator.items.IItem#getDescription()
 	 */
@@ -65,7 +65,7 @@ public class BasicItem implements IItem {
 		return getName();
 	}
 	
-	/*
+	/**
 	 * (non-Javadoc)
 	 * @see com.ts.salestaxcalculator.items.IItem#getName()
 	 */
@@ -83,7 +83,7 @@ public class BasicItem implements IItem {
 		this.name = name;
 	}
 	
-	/*
+	/**
 	 * (non-Javadoc)
 	 * @see com.ts.salestaxcalculator.items.IItem#getQuantity()
 	 */
@@ -101,7 +101,7 @@ public class BasicItem implements IItem {
 		this.quantity = quantity;
 	}
 	
-	/*
+	/**
 	 * (non-Javadoc)
 	 * @see com.ts.salestaxcalculator.items.IItem#getShelfPrice()
 	 */
@@ -111,7 +111,8 @@ public class BasicItem implements IItem {
 	}
 	
 	/**
-	 *  
+	 * set the item shelf price
+	 * 
 	 * @param shelfPrice
 	 */
 	public void setShelfPrice(double shelfPrice) 
