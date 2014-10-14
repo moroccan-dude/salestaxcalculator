@@ -56,13 +56,13 @@ public class Driver {
 		cart4.checkout();
 		cart4.printReceipt();
 		
-		System.out.println("low prices");
+		System.out.println("\nLow prices");
 		ShoppingCart cart5 = new ShoppingCart();
 		cart5.addItem(new BasicItem("music CD",0.09));
 		cart5.checkout();
 		cart5.printReceipt();
 		
-		System.out.println("high prices");
+		System.out.println("\nHigh prices");
 		ShoppingCart cart6 = new ShoppingCart();
 		cart6.addItem(new BasicItem("music CD",1000000000.42));
 		cart6.checkout();
